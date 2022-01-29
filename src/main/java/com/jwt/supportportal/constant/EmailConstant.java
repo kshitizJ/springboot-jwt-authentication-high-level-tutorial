@@ -3,9 +3,9 @@ package com.jwt.supportportal.constant;
 public class EmailConstant {
 
     public static final String SIMPLE_MAIL_TRANSFER_PROTOCOL = "smtp";
-    public static final String USERNAME = "java.projects.org@gmail.com";
-    public static final String PASSWORD = "Jai1mahavir@";
-    public static final String FROM_EMAIL = "java.projects.org@gmail.com";
+    public static final String USERNAME = "your.email.id@mail.com";
+    public static final String PASSWORD = "Your password";
+    public static final String FROM_EMAIL = "your.email.id@mail.com";
     public static final String CC_EMAIL = "";
     public static final String EMAIL_SUBJECT = "This is a mail for successfully registering your account.";
     public static final String GMAIL_SMTP_SERVER = "smtp.gmail.com";
