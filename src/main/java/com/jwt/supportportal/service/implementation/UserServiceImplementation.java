@@ -412,7 +412,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
                 throw new UsernameExistException("Username already exist.");
 
             log.info("Checking if the new email id exist in the database or not.");
-            if (userByNewEmail != null && !currentUser.getId().equals(userByNewEmail.getId()))
+            if (userByNewEmail != null && !currentUser.getEmail().equals(userByNewEmail.getEmail()))
                 throw new EmailExistException("Email already exist.");
 
             log.info("Everything is fine and we can update the user profile.");
