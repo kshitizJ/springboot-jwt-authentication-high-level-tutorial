@@ -181,7 +181,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         log.info("Setting profile image url of the user.");
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
 
-        emailService.sendSuccessfullyRegisterMessage(user.getFirstName(), user.getEmail());
+        // emailService.sendSuccessfullyRegisterMessage(user.getFirstName(),
+        // user.getEmail());
 
         return userRepository.save(user);
 

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * JwAuthorizationFilter
@@ -29,6 +30,7 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
+@Slf4j
 public class JwAuthorizationFilter extends OncePerRequestFilter {
 
     private JWTTokenProvider jwtTokenProvider;
@@ -38,31 +40,32 @@ public class JwAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         if (request.getMethod().equalsIgnoreCase(OPTIONS_HTTP_METHOD)) {
-            
+
             response.setStatus(OK.value());
 
         } else {
 
             String authorizationHeader = request.getHeader(AUTHORIZATION);
-            
+
             if (authorizationHeader == null || !authorizationHeader.startsWith(TOKEN_PREFIX)) {
 
                 filterChain.doFilter(request, response);
-                
+
                 return;
 
             }
 
             String token = authorizationHeader.substring(TOKEN_PREFIX.length());
-            
+
             String username = this.jwtTokenProvider.getSubject(token);
 
             if (this.jwtTokenProvider.isTokenValid(username, token)) {
+                log.info("Username:  ", username);
 
                 List<GrantedAuthority> authorities = this.jwtTokenProvider.getAuthorities(token);
-                
+
                 Authentication authentication = this.jwtTokenProvider.getAuthentication(username, authorities, request);
-                
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
             } else {
